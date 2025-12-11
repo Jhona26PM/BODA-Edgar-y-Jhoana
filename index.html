@@ -1,158 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería KUTI - Boda Edgar & Jhoana</title>
+<meta charset="UTF-8">
+<title>Galería de Boda</title>
 
-    <!-- Fuente elegante -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        font-family: "Georgia", serif;
+        background-image: url("fondo_boda.jpg"); /* Cambia por el nombre de tu fondo */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #4a2e2e;
+        text-align: center;
+    }
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Cormorant Garamond", serif;
-            background-image: url("fondo_boda.jpg"); /* Puedes cambiar esta imagen */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #4a3b2f;
-        }
+    h1 {
+        margin-top: 30px;
+        font-size: 2.8rem;
+        color: #5d3b3b;
+        text-shadow: 1px 1px 4px white;
+    }
 
-        h1 {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 52px;
-            color: #3b2a1d;
-            text-shadow: 3px 3px 7px rgba(255,255,255,0.9);
-        }
+    .boton-descarga-todo {
+        margin: 20px auto;
+        padding: 15px 25px;
+        font-size: 1.2rem;
+        background-color: #c79d7c;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
 
-        h2 {
-            text-align: center;
-            font-size: 26px;
-            margin-top: -10px;
-            margin-bottom: 30px;
-            color: #5b4635;
-        }
+    .galeria {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        padding: 30px;
+        max-width: 1200px;
+        margin: auto;
+    }
 
-        /* BOTÓN PRINCIPAL - DESCARGA ZIP */
-        .descarga {
-            text-align: center;
-            margin: 25px;
-        }
+    .contenedor-imagen {
+        background: rgba(255, 255, 255, 0.7);
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    }
 
-        .descarga a {
-            padding: 15px 28px;
-            background-color: #b78a60;
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-size: 22px;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-            transition: 0.3s;
-        }
+    .contenedor-imagen img {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0px 3px 10px rgba(0,0,0,0.3);
+    }
 
-        .descarga a:hover {
-            background-color: #8a6a47;
-            transform: scale(1.05);
-        }
+    .boton-descargar {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #8b5e5e;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        display: block;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+    }
+</style>
 
-        /* GALERÍA */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-            padding: 20px;
-            width: 90%;
-            margin: auto;
-        }
-
-        .foto-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-        }
-
-        .foto-container img {
-            width: 100%;
-            display: block;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-            transition: 0.3s;
-        }
-
-        .foto-container:hover img {
-            transform: scale(1.08);
-            filter: brightness(0.9);
-        }
-
-        /* Ícono de descarga individual */
-        .download-icon {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            background: rgba(183,138,96,0.95);
-            padding: 10px;
-            border-radius: 50%;
-            font-size: 20px;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-            transition: 0.3s;
-        }
-
-        .foto-container:hover .download-icon {
-            transform: scale(1.2);
-        }
-
-    </style>
 </head>
-
 <body>
 
-    <h1>Boda - Edgar & Jhoana</h1>
-    <h2>Gracias por permitirnos capturar este hermoso día</h2>
+<h1>Galería de la Boda</h1>
 
-    <!-- OPCIÓN A: DESCARGAR TODO EL ZIP -->
-    <div class="descarga">
-        <a href="TODAS_FOTOS_BODA.zip" download>📦 Descargar todas las fotos</a>
-    </div>
+<!-- Opción A: Botón para descargar TODAS las fotos -->
+<a class="boton-descarga-todo" href="TODAS_FOTOS_BODA.zip" download>
+    Descargar TODAS las fotos (ZIP)
+</a>
 
-    <!-- OPCIÓN C: DESCARGA INDIVIDUAL -->
-    <div class="gallery" id="gallery"></div>
+<div class="galeria" id="galeria"></div>
 
-    <script>
-        const gallery = document.getElementById("gallery");
+<script>
+    const contenedor = document.getElementById("galeria");
 
-        for (let i = 1; i <= 53; i++) {
-            // Crear contenedor
-            const container = document.createElement("div");
-            container.classList.add("foto-container");
+    const totalFotos = 53; 
+    for (let i = 1; i <= totalFotos; i++) {
+        const cont = document.createElement("div");
+        cont.classList.add("contenedor-imagen");
 
-            // Crear link de descarga individual
-            const link = document.createElement("a");
-            link.href = `Kuti_PRO${i}.jpeg`;
-            link.download = `Kuti_PRO${i}.jpeg`;
+        const img = document.createElement("img");
+        img.src = `Kuti_PRO${i}.jpeg`;
 
-            // Crear imagen
-            const img = document.createElement("img");
-            img.src = `Kuti_PRO${i}.jpeg`;
-            img.alt = `Foto ${i}`;
+        const boton = document.createElement("a");
+        boton.classList.add("boton-descargar");
+        boton.href = `Kuti_PRO${i}.jpeg`;
+        boton.download = `Kuti_PRO${i}.jpeg`;
+        boton.innerText = "Descargar foto";
 
-            // Crear ícono de descarga
-            const icon = document.createElement("div");
-            icon.classList.add("download-icon");
-            icon.innerHTML = "⬇";
+        cont.appendChild(img);
+        cont.appendChild(boton);
 
-            // Insertar elementos
-            link.appendChild(img);
-            container.appendChild(link);
-            container.appendChild(icon);
-            gallery.appendChild(container);
-        }
-    </script>
+        contenedor.appendChild(cont);
+    }
+</script>
 
 </body>
 </html>
